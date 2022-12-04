@@ -1,0 +1,81 @@
+数据库
+    用来组织，存储和管理数据的仓库
+常见的数据库和分类
+    MySql OR
+传统数据库的组织结构
+    Mysql server:
+        提供数据存储和数据服务器的软件
+    MySql workbench:可视化的server管理工具
+
+SQL语言
+    写出来的代码叫做SQL语句，只能用于关系数据库
+    语法
+    查询 SELECT 
+        SELECT * from 表民
+        SELECT 列名,列名2      from 表明
+    插入
+        insert into 表名 (列名1,列名2..) values(值1,值2)
+    更新
+        update 表明 server 属性=值 where 属性=值 （筛选的值  ）
+
+    DELET
+        delete from 表明 weher 列名 = 值
+
+    条件搜索
+        where +一些比较运算 
+        and or
+    order by 语法  
+        默认升序
+    SELECT * from 表名 order by 列名1   + ASC: 升序 DSC:降序，列名2
+        在ordey by可以多种特征排序 
+    查看条数
+        SELET COUNT(*) from 表明
+    AS设置别名 
+        可以给列名起别名  ·
+
+
+    在项目中操作MYSQL
+        1.安装mysql模块
+        2.连接到MySql数据库
+        3.执行SQL语句操作数据库
+    配置数据库
+        const mysql = require('mysql')
+
+        const db = mysql.createPool({
+            host:数据库ip地址
+            uesr:账号
+            password:密码
+            database:数据库名称
+        })
+    dp.query("SQL语句",(err,results)=>{
+         
+    })
+
+    使用SQL模块查询数据
+
+
+    插入数据
+        contt sqlstr = "INSERT INTO users (username,password) VALUES(?,?)"
+    dp.query(sqlstr,[user.name,user.password],(err,results=>
+    {
+       if results,affectedORows===1 表示成功了,代表影响的行数
+    }))
+
+    插入数据的便捷模式
+        如果数据的每个属性和数据表的字段一一对应,则可以直接插入数据对象
+        const = 'INSERT INTO users SET ?'
+        dp.query(sqlstr,user,(err,results=>
+    {
+       if results,affectedORows===1 表示成功了,代表影响的行数
+    }))
+
+    更新和删除数据
+        其实操作是一样的，只是提前把不同的sql语句写好并用占位符留好放数据的位置就行了 
+    cosnt sqlstr = 'UPDATE users SET usersname=?,password=1 where id=?'
+    dp.query(sqlstr,[user.name,user.password,user.id],(err,results=>
+    {
+       if results,affectedORows===1 表示成功了,代表影响的行数
+    }))
+
+    如果属性和键值对一样的，那么可以直接删除 
+    一般情况是使用标记删除用户的数据

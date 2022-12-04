@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+     <button id="get">GET</button>
+     <button id="post">POST</button>
+     <button id="cors">CORS </button>
+     <button id="jsonp">JSONP</button>
+</body>
+<script>
+    $(function(){
+        $("#get").on("click",function(){
+            $.ajax({
+                type:"GET",
+                url:'http://127.0.0.1/api/get',
+                data:{name:"zs",age:20},
+                success:function(res)
+                {
+                    console.log(res);
+                }
+
+            }
+            )
+        })
+        $("#post").on("click",function(){
+            $.ajax({
+                type:"POST",
+                url:'http://127.0.0.1/api/post',
+                data:{name:"post",age:20},
+                success:function(res)
+                {
+                    console.log(res);
+                }
+
+            }
+            )
+        })
+        $("#cors").on("click",function(){
+            $.ajax({
+                type:"DELETE",
+                url:'http://127.0.0.1/api/delete',
+                data:{name:"post",age:20},
+                success:function(res)
+                {
+                    console.log(res);
+                }
+
+            }
+            )
+        })
+        $("#jsonp").on("click",function(){
+            $.ajax({
+                type:"GET",
+                url:'http://127.0.0.1/api/jsonp',
+                dataType:'jsonp',
+                success:function(res)
+                {
+                    console.log(res);
+                }
+
+            }
+            )
+        })
+    })
+
+ 
+    /*
+    * CORS:主流解决问题
+    * JSONP:只支持GET请求
+    * cors就是一个express的中间件直接下载并挂载到app中
+    * cors主要在服务器端进行配置，客户端无须做任何事情，即可开启CORS请求z   
+    * Access-control-Allow-Origin:<origin>|*
+    *   主要负责限制那些URL可以请求
+    * Access-control-Allow-Headers
+    *   默认情况下是9个请求头，如果超过了通过Headers进行请求声明
+    * Access-control-Allow-Methods
+    *   默认情况下仅支持发送GET POST HEAD请求，如果有额外的需要用Methods发送请求
+    * 
+    * CORS可以根据请求头和请求方式的不同，分为两类
+    * 简单请求：
+    *   只包含三种基本请求，HTTP请求头部，无自定义头部字段
+    * 预检请求：
+    *   包含其他的请求方式，包含多种自定义的请求头，向服务器发送了appliction和json的数据格式
+    * 在服务器和浏览器通信之前，浏览器会预先发送option请求进行预检，以知道是否能够以这种方式进行请求
+    * 成功之后才会发送请求
+    * 
+    * 请求方式的区别就是请求服务器的次数
+    */
+</script>
+</html>
